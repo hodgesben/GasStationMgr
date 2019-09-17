@@ -5,40 +5,71 @@ import java.io.FileNotFoundException;
 
 public class Store 
 {
-  String name;
+  String name;        // name of the store
+  int price;          // price to buy store
+  String location;    // where store is located
+  int businessHours;  // When store is open
   
-  public Store(String name)
+  public Store(String name2, int price2, String location2)
   {
-	  this.name = name;
+  	this.name = name2;
+  	this.price = price2;
+  	this.location = location2;
+  } // end constructor
+  
+  // ***********************************************
+  
+  // Prints all known Information about the Store
+  
+  public void getInfo() 
+  {
+  	
   }
   
-  public static void main(String[] args) 
-  {
-	System.out.println("Hello Welcome To Gas Station Manager!");
-	Scanner std = new Scanner(System.in);
-	
-	Store Store = new Store(std.nextLine());
-	
-	System.out.println(Store.getName());
-	
-    generateEmployees();
-    generateProducts();
-		
-   std.close();
-
-  }
   
-  private String getName() 
+  //*************************************************
+  
+  // Returns the name of the store
+  
+	public String getName() 
   {
-	return this.name;
+	  return this.name;
+  } // end getName
+  
+	//**************************************************
 	
-  }
-
-  private static void generateEmployees() 
+	// Returns the Price of the Store
+	
+	public int getPrice()
+	{
+		return this.price;
+	}
+	
+	//**************************************************
+	
+	// Returns the BusinessHours of the Store
+	
+	public int getBusinessHours()
+	{
+	  return this.businessHours;	
+	}
+	
+	//**************************************************
+	
+	// Returns the Location of the Store
+	
+	public String getLocation()
+	{
+		return this.location;
+	}
+	
+	
+	
+  public void generateEmployees() 
   {
-	Employee Employee = new Employee();
+	  Employee Employee = new Employee();
 	
-    File file = new File("C:\\Users\\Ben\\document.json"); 
+    File file = new File("C:/Employees.json"); 
     Scanner sc = null;
 	try 
 	{
@@ -53,7 +84,7 @@ public class Store
     }
   } 
 
-  private static void generateProducts() 
+  public void generateProducts() 
   {
 		
 		
