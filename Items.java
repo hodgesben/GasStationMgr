@@ -1,6 +1,3 @@
-
-
-
 public class Items
 {
   String name;

@@ -1,10 +1,9 @@
-import java.util.*;
-
 public class Employee 
 {
-	double wage;
 	String name;
 	int age;
+	double wage;
+	String rating;
 	String strengths;
 	String weaknesses;
 	
@@ -12,31 +11,39 @@ public class Employee
 	
 	// Prints out all the information about the Employee
 	
-	public void getInfo() 
+	public Employee(String name, int age, double wage, String rating, String strengths, String weaknesses)
 	{
-		System.out.println("Name: " + this.name);
-		System.out.println("Age: " + this.age);
-		System.out.println("Wage: " + this.wage);
-		System.out.println("Strengths: " + this.strengths);
-		System.out.println("Weaknesses: " + this.weaknesses);
+		this.name = name;
+		this.age = age;
+		this.wage = wage;
+		this.rating = rating;
+		this.strengths = strengths;
+		this.weaknesses = weaknesses;
+	} // end constructor
+
+	public String printInfo() 
+	{
+
+		return "Name: " + this.name + "\nAge: " + this.age 
+				+ "\nWage: " + this.wage + "\nRating:  " + this.rating +
+				"\nStrengths: " + this.strengths + "\nWeaknesses: " + 
+				this.weaknesses + "\n";
 	}  // end getInfo
 	
 	public double getWage()
 	{
 		return this.wage;
-	}
-	
-	
+	} // end getWage
 	
 	public String getName()
 	{
 		return this.name;
-	}
+	} // end getName
 	
-	public int age()
+	public int getAge()
 	{
 		return this.age;
-	}
+	} // end getAge
 	
 	public String getStrengths()
 	{

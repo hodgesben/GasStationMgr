@@ -1,8 +1,3 @@
-import java.util.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-
-
 public class Store 
 {
   String name;        // name of the store
@@ -10,21 +5,22 @@ public class Store
   String location;    // where store is located
   int businessHours;  // When store is open
   
-  public Store(String name2, int price2, String location2)
+  public Store(String name, int price, String location)
   {
-  	this.name = name2;
-  	this.price = price2;
-  	this.location = location2;
+  	this.name = name;
+  	this.price = price;
+  	this.location = location;
   } // end constructor
   
   // ***********************************************
   
   // Prints all known Information about the Store
   
-  public void getInfo() 
+  public String printInfo() 
   {
-  	
-  }
+  	return "Name: " + this.name + "\nPrice: " 
+      + this.price + "\nLocation: " + this.location + "\n";
+  } // end getInfo
   
   
   //*************************************************
@@ -38,55 +34,29 @@ public class Store
   
 	//**************************************************
 	
-	// Returns the Price of the Store
+	// Returns the Price of the store
 	
 	public int getPrice()
 	{
 		return this.price;
-	}
+	} // end getPrice
 	
 	//**************************************************
 	
-	// Returns the BusinessHours of the Store
+	// Returns the BusinessHours of the store
 	
 	public int getBusinessHours()
 	{
 	  return this.businessHours;	
-	}
+	} // end getBusinessHours
 	
 	//**************************************************
 	
-	// Returns the Location of the Store
+	// Returns the Location of the store
 	
 	public String getLocation()
 	{
 		return this.location;
-	}
-	
-	
-	
-  public void generateEmployees() 
-  {
-	  Employee Employee = new Employee();
-	
-    File file = new File("C:/Employees.json"); 
-    Scanner sc = null;
-	try 
-	{
-	  sc = new Scanner(file);
-	} catch (FileNotFoundException e) 
-	{
-	  e.printStackTrace();
-	} 
-    while (sc.hasNextLine())
-    {
-      System.out.println(sc.nextLine()); 
-    }
-  } 
+	} // end getLocation
 
-  public void generateProducts() 
-  {
-		
-		
-  }
-}
+} // end Store
