@@ -9,7 +9,7 @@ public class Employee
 	
 	// **********************************************************
 	
-	// Prints out all the information about the Employee
+	// Constructor sets all the employee base information
 	
 	public Employee(String name, int age, double wage, String rating, String strengths, String weaknesses)
 	{
@@ -21,6 +21,11 @@ public class Employee
 		this.weaknesses = weaknesses;
 	} // end constructor
 
+	
+	// **********************************************************
+	
+	// Returns a string of all the information about the Employee
+	
 	public String printInfo() 
 	{
 
@@ -48,14 +53,15 @@ public class Employee
 	public String getStrengths()
 	{
 		return this.strengths;
-	}
+	} // end getStrengths
 	
 	public String getWeaknesses()
-
 	{
 		return this.weaknesses;
-	}
-
+	} // end getWeaknesses
 	
-
+	public void setWage(double wage)
+	{
+		this.wage = wage;
+	} // end setWage
 }

@@ -1,9 +1,12 @@
 public class Store 
 {
-  String name;        // name of the store
-  int price;          // price to buy store
-  String location;    // where store is located
-  int businessHours;  // When store is open
+  String name;                       // name of the store
+  private final int price;           // price to buy store
+  private final String location;     // where store is located
+  
+  // ***********************************************
+  
+  //  Constructor sets all the base Store information
   
   public Store(String name, int price, String location)
   {
@@ -14,14 +17,13 @@ public class Store
   
   // ***********************************************
   
-  // Prints all known Information about the Store
+  // Returns a string of all the information about the Store
   
   public String printInfo() 
   {
   	return "Name: " + this.name + "\nPrice: " 
-      + this.price + "\nLocation: " + this.location + "\n";
+      + this.price + "\nLocation: " + this.location;
   } // end getInfo
-  
   
   //*************************************************
   
@@ -43,20 +45,20 @@ public class Store
 	
 	//**************************************************
 	
-	// Returns the BusinessHours of the store
-	
-	public int getBusinessHours()
-	{
-	  return this.businessHours;	
-	} // end getBusinessHours
-	
-	//**************************************************
-	
 	// Returns the Location of the store
 	
 	public String getLocation()
 	{
 		return this.location;
 	} // end getLocation
-
+	
+	
+	//**************************************************
+	
+	// Sets the Name That you want to Call your Gas Station
+	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 } // end Store

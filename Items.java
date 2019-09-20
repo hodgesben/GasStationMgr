@@ -1,7 +1,6 @@
 public class Items
 {
-  String name;
   String catagory;
+  String name;
   double price;
-  
 }
