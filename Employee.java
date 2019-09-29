@@ -1,15 +1,30 @@
+import java.util.ArrayList;
+
 public class Employee 
 {
-	String name;
-	int age;
-	double wage;
-	String rating;
-	String strengths;
-	String weaknesses;
+	private final String name;
+	private int age;
+	private double wage;
+	private final String rating;
+	private final String strengths;
+	private final String weaknesses;
 	
+	// Create an ArrayList of Possible Employees up for Hire
+	public ArrayList<Employee> employeeList = new ArrayList<Employee>(); 
+
 	// **********************************************************
 	
 	// Constructor sets all the employee base information
+	
+	public Employee()
+	{
+		name = "";
+		age = 0;
+		wage = 0;
+		rating = "";
+		strengths = "";
+		weaknesses = "";
+	}
 	
 	public Employee(String name, int age, double wage, String rating, String strengths, String weaknesses)
 	{
@@ -20,7 +35,20 @@ public class Employee
 		this.strengths = strengths;
 		this.weaknesses = weaknesses;
 	} // end constructor
-
+	
+	//*********************************************************
+  
+  // This method is the basic way to add to the Employees to the Employee Array
+	
+	public void loadEmployees()
+	{
+		//	employee[i] =  new Employee
+		 //      (String name, int age, double wage,String rating,String strengths,String weaknesses);
+		employeeList.add(new Employee("Ben Packer", 24, 12.5, "3/5 Stars", "Fast", "Incosistant"));
+		employeeList.add(new Employee("Rachel Flower", 24, 12.5, "3/5 Stars", "Slow", "Does great job"));
+		employeeList.add(new Employee("Ben Packer", 24, 12.5, "4/5 Stars", "Fast", "Incosistant"));
+		
+	} // end loadEmployees
 	
 	// **********************************************************
 	
@@ -64,4 +92,14 @@ public class Employee
 	{
 		this.wage = wage;
 	} // end setWage
-}
+	
+	public void setAge(int age)
+	{
+		this.age = age;
+	} // end setAge
+
+	public String getRating()
+	{
+		return this.rating;
+	}
+} // end Emmployee

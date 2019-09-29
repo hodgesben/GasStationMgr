@@ -2,11 +2,15 @@ import java.util.ArrayList; // import the ArrayList class
 
 public class Store 
 {
-  private String name;                                        // name of the store
-  private final int price;                                    // price to buy store
-  private final String location;                              // where store is located
-	public ArrayList<Employee> PossEmployees = new ArrayList<Employee>(); // Create an ArrayList object
-	public ArrayList<Employee> CurEmployees = new ArrayList<Employee>(); // Create an ArrayList object
+  private String name;                   // name of the store
+  private final int price;               // price to buy store
+  private final String location;         // where store is located
+	
+	// Create an ArrayList of Current Employees at the Store
+	public ArrayList<Employee> Employees = new ArrayList<Employee>();  
+	
+	// Create an ArrayList of Items in the Store
+	public ArrayList<Items> Items = new ArrayList<Items>();  
 
   // ***********************************************
   
@@ -56,7 +60,6 @@ public class Store
 		return this.location;
 	} // end getLocation
 	
-	
 	//**************************************************
 	
 	// Sets the Name That you want to Call your Gas Station
@@ -64,21 +67,7 @@ public class Store
 	public void setName(String name)
 	{
 		this.name = name;
-	}
-
-	//*********************************************************
-  
-  // This method is the basic way to add to the Employees to the Employee Array
-	
-	public void createEmployees()
-	{
-		//	employee[i] =  new Employee
-		 //      (String name, int age, double wage,String rating,String strengths,String weaknesses);
-		PossEmployees.add(new Employee("Ben Packer", 24, 12.5, "3/5 Stars", "Fast", "Incosistant"));
-		PossEmployees.add(new Employee("Rachel Flower", 24, 12.5, "3/5 Stars", "Slow", "Does great job"));
-		PossEmployees.add(new Employee("Ben Packer", 24, 12.5, "4/5 Stars", "Fast", "Incosistant"));
-		
-	} // end createEmployees
+	} // end setName
 
 	public String printEmployeeInfo(ArrayList<Employee> curEmployees)
 	{
@@ -89,54 +78,88 @@ public class Store
 		}
 		return tempString;
 		
+	} // end printEmployeeInfo
+	
+	//**************************************************
+	
+	// Hires an employee from the list of employees
+	// Puts it in the Employee Array List
+
+	public void hireEmployee(int userPick, ArrayList<Employee> employee)
+	{
+		String name;
+		int age;
+		double wage;
+		String rating;
+		String strength;
+		String weakness;
+		
+		try
+		{
+			name = employee.get(userPick).getName();
+			age =  employee.get(userPick).getAge();
+			
+			wage =  employee.get(userPick).getWage();
+			rating =  employee.get(userPick).getRating();
+			strength =  employee.get(userPick).getStrengths();
+			weakness =  employee.get(userPick).getWeaknesses();
+			
+			Employees.add(new Employee(name, age, wage, rating, strength, weakness));
+			employee.remove(userPick);
+			
+			System.out.println(name + " successfully added as a new Employee\n");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Try Again. Please select a valid Number\n");
+		}
+	}
+	
+	
+	
+	public void fireEmployee(int userPick, ArrayList<Employee> employee)
+	{	
+		String name;
+		int age;
+		double wage;
+		String rating;
+		String strength;
+		String weekness;
+		
+		try
+		{
+			name = Employees.get(userPick).getName();
+			age = Employees.get(userPick).getAge();
+			wage = Employees.get(userPick).getWage();
+			rating = Employees.get(userPick).getRating();
+			strength = Employees.get(userPick).getStrengths();
+			weekness = Employees.get(userPick).getWeaknesses();
+			
+			employee.add(new Employee(name, age, wage, rating, strength, weekness));
+			Employees.remove(userPick);
+			System.out.println(name + " successfully fired as an Employee\n");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Try Again. Please select a valid Number\n");
+		}
 	}
 
-	public void hireEmployee(int userPick)
-	{
-		
-		String name;
-		int age;
-		double wage;
-		String rating;
-		String strength;
-		String weekness;
-		
-		name = PossEmployees.get(userPick).name;
-		age = PossEmployees.get(userPick).age;
-		
-		wage = PossEmployees.get(userPick).wage;
-		rating = PossEmployees.get(userPick).rating;
-		strength = PossEmployees.get(userPick).strengths;
-		weekness = PossEmployees.get(userPick).weaknesses;
-		
-		CurEmployees.add(new Employee(name, age, wage, rating, strength, weekness));
-		PossEmployees.remove(userPick);
-		
-		System.out.println(name + " successfully added as a new Employee\n");
-	}
 	
-	public void fireEmployee(int userPick)
-	{
-		
-		String name;
-		int age;
-		double wage;
-		String rating;
-		String strength;
-		String weekness;
-		
-		name = CurEmployees.get(userPick).name;
-		age = CurEmployees.get(userPick).age;
-		
-		wage = CurEmployees.get(userPick).wage;
-		rating = CurEmployees.get(userPick).rating;
-		strength = CurEmployees.get(userPick).strengths;
-		weekness = CurEmployees.get(userPick).weaknesses;
-		
-		PossEmployees.add(new Employee(name, age, wage, rating, strength, weekness));
-		CurEmployees.remove(userPick);
-		
-		System.out.println(name + " successfully fired as an Employee\n");
-	}
 	
+	public void giveEmployeeRaise(int userPick, ArrayList<Employee> employee)
+	{
+		try
+		{
+			double curentWage = employee.get(userPick).getWage();
+			
+			employee.get(userPick).setWage(curentWage += .5);
+			
+			System.out.println("You succefully gave " + employee.get(userPick).getName() + " a 50\u00A2 raise.\n");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Try Again. Please select a valid Number\n");
+		}
+	} // end giveEmployeeRaise
 } // end Store

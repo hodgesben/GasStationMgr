@@ -1,0 +1,28 @@
+[
+  {
+    "store":
+   {
+    "name":"Hy-Vee",
+    "price": "15000",
+    "location":"Downtown"
+   }
+  },
+  {
+    "store":
+     {
+      "name":"Quick Trip",
+      "price": "10000",
+      "location":"Country"
+     }
+  },
+  {
+    "store":
+     {
+      "name":"Go Mart",
+      "price": "25000",
+      "location":"Suburbs"
+     }
+  },
+]
+
+ 

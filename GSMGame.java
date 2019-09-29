@@ -20,10 +20,11 @@ public class GSMGame
 {
 	private static int money = 10000;        // amount of money Person has
 	private static Store store = new Store("QuickTrip", 20000, "DownTown"); // Initializing  store class
+	private static Employee employee = new Employee();
 	
 	public static void main(String[] args) 
   {
-    store.createEmployees();
+    employee.loadEmployees();
   	printInstructions();
   	displayMainMenu();
 	} // end main
@@ -95,6 +96,7 @@ public class GSMGame
 	//*********************************************************
   
   // Prints out the Manage Employees Menu options
+	// Takes in input to see what sub menu to go to
 
 	private static void manageEmployeesMenu()
 	{
@@ -135,31 +137,77 @@ public class GSMGame
 	
 	//*********************************************************
   
-  // Prints out the Sell Items Menu options
+  // 
 
 	private static void giveEmployeeRaise()
 	{
-		System.out.println("Give Employee Raise");
-		System.out.println("-------------------------------------------");
-		System.out.println("Select the Number of the Employee You wish to Give a raise\n");
-  	System.out.println(store.printEmployeeInfo(store.CurEmployees));
-	}
+		Scanner std = new Scanner(System.in);
+		
+		if(store.Employees.size() > 0)    // If there is employees available to fire
+		{
+			System.out.println("Give Employee Raise");
+			System.out.println("-------------------------------------------");
+			System.out.println("Select the Number of the Employee You wish to Give a raise\n");
+	  	System.out.println(store.printEmployeeInfo(store.Employees));
+	  	try
+	  	{
+				int userPick = std.nextInt();	
+				store.giveEmployeeRaise(userPick, store.Employees);
+	  	}
+	  	catch(Exception e)
+	  	{
+	  		System.out.println("Enter a Valid  Number\n");
+	  		giveEmployeeRaise();
+	  	}
+			manageEmployeesMenu();
+	  	
+		}
+		else
+		{
+			System.out.println("You do not have any employees at this time\n");
+			System.out.println("Press Enter To Continue");
+			std.nextLine();
+			manageEmployeesMenu();
+		}
+	} // end giveEmployeeRaise
+	
+	//*********************************************************
+  
+  // Prints the list of Current Employees 
+	// Lets you pick from the list
+	// Updates the Available/Current List of Employees 
 
 	private static void fireEmployee()
 	{
-		System.out.println("Fire Emplyee");
-		System.out.println("---------------------------------------------");
-		System.out.println("Heres a list of Your Employees at " + store.getName());
-		System.out.println("Select the Number of the Employee You wish to Fire\n");
-		
-  	System.out.println(store.printEmployeeInfo(store.CurEmployees));
-  	
 		Scanner std = new Scanner(System.in);
-		int userPick = std.nextInt();	
 		
-		store.fireEmployee(userPick);
-
-		manageEmployeesMenu();
+		if(store.Employees.size() > 0)    // If there is employees available to fire
+		{
+			System.out.println("Fire Emplyee");
+			System.out.println("---------------------------------------------");
+			System.out.println("Heres a list of Your Employees at " + store.getName());
+			System.out.println("Select the Number of the Employee You wish to Fire\n");
+			
+	  	System.out.println(store.printEmployeeInfo(store.Employees));
+	  	try
+	  	{
+				int userPick = std.nextInt();	
+				store.fireEmployee(userPick, employee.employeeList);
+	  	}
+	  	catch(Exception e)
+	  	{
+	  		System.out.println("Enter a Valid  Number\n");
+	  		fireEmployee();
+	  	}
+			manageEmployeesMenu();
+		}
+		else
+		{
+			System.out.println("You do not have any employees at this time\n");
+			System.out.println("Press Enter To Continue");
+			std.nextLine();
+			manageEmployeesMenu();
+		}
 	}
 
 	//*********************************************************
@@ -172,15 +220,23 @@ public class GSMGame
 	{
 		Scanner std = new Scanner(System.in);
 		
-		if(store.PossEmployees.size() > 0)    // If there is employees available to hire
+		if(employee.employeeList.size() > 0)    // If there is employees available to hire
 		{
 			System.out.println("Hire Employee");
 			System.out.println("---------------------------------------------");
 			System.out.println("Heres a list of possible Employees To Hire at " + store.getName());
 			System.out.println("Select the Number of the Employee You wish to hire\n");
-	  	System.out.println(store.printEmployeeInfo(store.PossEmployees));
-			int userPick = std.nextInt();	
-			store.hireEmployee(userPick);
+	  	System.out.println(store.printEmployeeInfo(employee.employeeList));
+	  	try
+	  	{
+				int userPick = std.nextInt();	
+				store.hireEmployee(userPick , employee.employeeList);
+	  	}
+	  	catch(Exception e)
+	  	{
+	  		System.out.println("Enter a Valid  Number\n");
+	  		hireEmployee();
+	  	}
 			manageEmployeesMenu();
 		}
 		else
@@ -297,10 +353,4 @@ public class GSMGame
   	   stores[1] =  new Store(name, Integer.parseInt(price), location);
   	   stores[2] =  new Store(name, Integer.parseInt(price), location);
 	} // end parseStoreObject
-
-	//****************************************************************************************
-  
-  // This prints the opening instructions to the Gas Station Manager game
-  
-
 }  // end GSMGame
