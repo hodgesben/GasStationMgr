@@ -1,0 +1,25 @@
+[{
+  "name": "Reese's",
+  "catagory": "Candy",
+  "buyPrice": 1
+}, {
+  "name": "Hershey",
+  "catagory": "Candy",
+  "buyPrice": 1
+}, {
+  "name": "Skittles",
+  "catagory": "Candy",
+  "buyPrice": 1
+}, {
+  "name": "Bud-Light",
+  "catagory": "Beer",
+  "buyPrice": 10
+}, {
+  "name": "Natural Light",
+  "catagory": "Beer",
+  "buyPrice": 7
+}, {
+  "name": "Boulevard",
+  "catagory": "Beer",
+  "buyPrice": 12
+}]
