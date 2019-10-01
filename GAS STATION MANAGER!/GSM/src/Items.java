@@ -71,7 +71,7 @@ public class Items
 		
 		try 
 		{
-			Items[] myPojo = mapper.readValue(new File("Items.json"), Items[].class);
+			Items[] myPojo = mapper.readValue(new File("C:/Users/Ben/git/GasStationMgr/GAS STATION MANAGER!/GSM/Items.json"), Items[].class);
 			for(int i=0; i < myPojo.length; i++)
 			{
 				Items.add(new Items(myPojo[i].getName(), myPojo[i].getCatagory(), myPojo[i].getBuyPrice()));
