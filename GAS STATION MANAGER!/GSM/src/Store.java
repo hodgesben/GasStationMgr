@@ -5,7 +5,7 @@ public class Store
   private String name;                   // name of the store
   private final int price;               // price to buy store
   private final String location;         // where store is located
-	
+  private static GSMGame game = new GSMGame();
   // Create an ArrayList of Current Employees at the Store
   private ArrayList<Employee> Employees = new ArrayList<Employee>();  
 	
@@ -102,7 +102,8 @@ public class Store
 	int rating;
 	String strength;
 	String weakness;
-		
+	int hireDay;
+	
     try
     {
 	  name = employee.get(userPick).getName();
@@ -111,10 +112,11 @@ public class Store
 	  rating =  employee.get(userPick).getRating();
   	  strength =  employee.get(userPick).getStrengths();
 	  weakness =  employee.get(userPick).getWeaknesses();
-			
-	  Employees.add(new Employee(name, age, wage, rating, strength, weakness));
+      hireDay = game.getNumOfDays();
+      
+	  Employees.add(new Employee(name, age, wage, rating, strength, weakness, hireDay));
 	  employee.remove(userPick);
-			
+	
 	  System.out.println(name + " successfully added as a new Employee\n");
     }
     catch(Exception e)
@@ -131,6 +133,7 @@ public class Store
 	int rating;
 	String strength;
     String weekness;
+    int hireDay;
 
 	try
 	{
@@ -140,8 +143,9 @@ public class Store
 	  rating = Employees.get(userPick).getRating();
 	  strength = Employees.get(userPick).getStrengths();
 	  weekness = Employees.get(userPick).getWeaknesses();
-
-	  employee.add(new Employee(name, age, wage, rating, strength, weekness));
+	  hireDay = game.getNumOfDays();
+	  
+	  employee.add(new Employee(name, age, wage, rating, strength, weekness, hireDay));
 	  Employees.remove(userPick);
 	  System.out.println(name + " successfully fired as an Employee\n");
    	}

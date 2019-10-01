@@ -6,6 +6,7 @@ public class Items
 {
   private final String catagory;
   private final String name;
+  private int count;
   private final double buyPrice;
   private double sellPrice;
   private final String[] itemsCatagory = new String[] {"Beer", "Candy", "Food", "Drinks", "Snacks"};
@@ -28,12 +29,12 @@ public class Items
 	name = "";
 	buyPrice = 0;
 	sellPrice = 0;
-  }
+  } // end defualt constructor
   
   public ArrayList<Items> getItemsArry()
   {
 	return Items;
-  }
+  } // end getItemsArry
   
   public String printInfo() 
   {
@@ -59,13 +60,13 @@ public class Items
   public void setSellPrice(double price)
   {
 	this.sellPrice = price;
-  }
+  } // end setSellPrice
 	
   // ***********************************************
   
   //  Loads All the Items In the JASON File
 	
-  public void loadItemsJASON()
+  public void loadItemsJSON()
   {
 	ObjectMapper mapper = new ObjectMapper();
 	try 

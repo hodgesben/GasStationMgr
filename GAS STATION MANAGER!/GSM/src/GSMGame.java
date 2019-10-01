@@ -15,12 +15,12 @@ public class GSMGame
   private static Store store = new Store("QuickTrip", 20000, "DownTown"); // Initializing  store class
   private static Employee employee = new Employee();
   private static Items items = new Items();
-  private static int numOfDays = 0;
+  private static int numOfDays = 1;
 	
   public static void main(String[] args) 
   {
-	items.loadItems();
-	items.printItemsInfo(items.getItemsArry());
+	items.loadItemsJSON();
+//	items.printItemsInfo(items.getItemsArry());
     employee.loadEmployees();
   	printInstructions();
   	displayMainMenu();
@@ -145,11 +145,19 @@ public class GSMGame
 	  System.out.println("Give Employee Raise");
 	  System.out.println("-------------------------------------------");
 	  System.out.println("Select the Number of the Employee You wish to Give a raise\n");
+	  System.out.println("Or type -1 to return to Manage Employee Main Menu\n");
 	  System.out.println(store.printEmployeeInfo(store.getEmployeeArry()));
 	  try
 	  {
 		int userPick = std.nextInt();	
-		store.giveEmployeeRaise(userPick, store.getEmployeeArry());
+		if(userPick == -1)
+		{
+		  manageEmployeesMenu();
+		}
+		else
+		{
+		  store.giveEmployeeRaise(userPick, store.getEmployeeArry());
+		}
 	  }
 	  catch(Exception e)
 	  {
@@ -183,13 +191,21 @@ public class GSMGame
 	  System.out.println("Fire Emplyee");
 	  System.out.println("---------------------------------------------");
 	  System.out.println("Heres a list of Your Employees at " + store.getName());
-	  System.out.println("Select the Number of the Employee You wish to Fire\n");	
+	  System.out.println("Select the Number of the Employee You wish to Fire");
+	  System.out.println("Or type -1 to return to Manage Employee Main Menu\n");
 	  System.out.println(store.printEmployeeInfo(store.getEmployeeArry()));
 	  
 	  try
 	  {
-		int userPick = std.nextInt();	
-		store.fireEmployee(userPick, employee.getEmployeeArry());
+		int userPick = std.nextInt();
+		if(userPick == -1)
+		{
+		  manageEmployeesMenu();
+		}
+		else
+		{
+		  store.fireEmployee(userPick, employee.getEmployeeArry());
+		}
 	  }
 	  catch(Exception e)
 	  {
@@ -221,12 +237,22 @@ public class GSMGame
 	  System.out.println("Hire Employee");
 	  System.out.println("---------------------------------------------");
 	  System.out.println("Heres a list of possible Employees To Hire at " + store.getName());
-	  System.out.println("Select the Number of the Employee You wish to hire\n");
+	  System.out.println("Select the Number of the Employee You wish to hire");
+	  System.out.println("Or type -1 to return to Manage Employee Main Menu\n");
 	  System.out.println(store.printEmployeeInfo(employee.getEmployeeArry()));
+	  
 	  try
 	  {
-		int userPick = std.nextInt();	
-		store.hireEmployee(userPick , employee.getEmployeeArry());
+		int userPick = std.nextInt();
+		if(userPick == -1)
+		{
+		  manageEmployeesMenu();
+		}
+		else
+		{
+		  money -= employee.getEmployeeArry().get(userPick).getWage();
+		  store.hireEmployee(userPick , employee.getEmployeeArry());
+		}
 	  }
 	  catch(Exception e)
 	  {
@@ -249,18 +275,44 @@ public class GSMGame
 	dailySim();
 	System.out.println("Yesturday's Information");
 	System.out.println("---------------------------");
-	System.out.println(getDailyInfo());
-		
+	printDailyInfo();
 	displayMainMenu();
   }
+  
+  // *********************************************************************
+  
+  // Simulates a day at the Gas Station
 	
   private static void dailySim()
   {
-	numOfDays++;
-  }
+	numOfDays++;  // increment number of days
+	int j;
+	
+	// Checks the array of employees to see if any need their monthly paycheck
+	for(int i=0; i<store.getEmployeeArry().size(); i++)
+	{
+		j = (store.getEmployeeArry().get(i).getHireDate());
+		System.out.println(j);
+	  if(((numOfDays - store.getEmployeeArry().get(i).getHireDate()) % 30) == 0)
+	  {
+		money -= store.getEmployeeArry().get(i).getWage();	
+	  }
+	}
+  } // end dailySim
+  
+  // **********************************************************************
+  
+  // Prints the information that happened that day.
 
-  private static String getDailyInfo()
+  private static void printDailyInfo()
   {
-	return "Current Money: " + money + "\nCurrent Day: " + numOfDays + "\nNumber of Items Sold: ";
+	System.out.println("Current Money: $" + money);
+	System.out.println("Current Day: " + numOfDays);
+	System.out.println("Number of Items Sold: ");
+  }
+  
+  public int getNumOfDays()
+  {
+	return numOfDays;
   }
 }  // end GSMGame
