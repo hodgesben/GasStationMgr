@@ -12,86 +12,86 @@ public class Employee
   // Create an ArrayList of Possible Employees up for Hire
   private ArrayList<Employee> Employees = new ArrayList<Employee>(); 
 
-	// **********************************************************
+  // **********************************************************
 	
-	// Constructor sets all the employee base information
+  // Default Constructor
 	
-	public Employee()
-	{
-		name = "";
-		age = 0;
-		wage = 0;
-		rating = 0;
-		strengths = "";
-		weaknesses = "";
-	}
+  public Employee()
+  {
+	this.name = "";
+	this.age = 0;
+	this.wage = 0;
+	this.rating = 0;
+	this.strengths = "";
+	this.weaknesses = "";
+  }
 	
-	public Employee(String name, int age, double wage, int rating, String strengths, String weaknesses)
-	{
-		this.name = name;
-		this.age = age;
-		this.wage = wage;
-		this.rating = rating;
-		this.strengths = strengths;
-		this.weaknesses = weaknesses;
-	} // end constructor
+  // **********************************************************
 	
-	//*********************************************************
+  // Load in values to the EMployee object
   
-  // This method is the basic way to add to the Employees to the Employee Array
+  public Employee(String name, int age, double wage, int rating, String strengths, String weaknesses)
+  {
+	this.name = name;
+	this.age = age;
+	this.wage = wage;
+	this.rating = rating;
+	this.strengths = strengths;
+	this.weaknesses = weaknesses;
+  } // end constructor
 	
-	public void loadEmployees()
-	{
-		//	employee[i] =  new Employee
-		 //      (String name, int age, double wage,String rating,String strengths,String weaknesses);
-		Employees.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant"));
-		Employees.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job"));
-		Employees.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant"));
-		
-	} // end loadEmployees
+  //*********************************************************
+  
+  // This method adds Employees objects to the Employees Array
 	
-	// **********************************************************
+  public void loadEmployees()
+  {
+	Employees.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant"));
+	Employees.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job"));
+	Employees.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant"));	
+  } // end loadEmployees
 	
-	// Returns a string of all the information about the Employee
+  // **********************************************************
 	
-	public String printInfo() 
-	{
-
-		return "Name: " + this.name + "\nAge: " + this.age 
-				+ "\nWage: " + this.wage + "\nRating: " + this.rating + " star" +
-				"\nStrengths: " + this.strengths + "\nWeaknesses: " + 
-				this.weaknesses + "\n";
-	}  // end getInfo
+  // Returns a string of all the information about the Employee
 	
-	public double getWage()
-	{
-		return this.wage;
-	} // end getWage
+  public String printInfo() 
+  {
+	return "Name: " + this.name + "\nAge: " + this.age 
+	  + "\nWage: " + this.wage + "\nRating: " + this.rating + " star" 
+	  +  "\nStrengths: " + this.strengths + "\nWeaknesses: " 
+	  + this.weaknesses + "\n";
+  }  // end getInfo
 	
-	public String getName()
-	{
-		return this.name;
-	} // end getName
+  public double getWage()
+  {
+	return this.wage;
+  } // end getWage
 	
-	public int getAge()
-	{
-		return this.age;
-	} // end getAge
+  public String getName()
+  {
+	return this.name;
+  } // end getName
 	
-	public String getStrengths()
-	{
-		return this.strengths;
-	} // end getStrengths
+  public int getAge()
+  {
+	return this.age;
+  } // end getAge
 	
-	public String getWeaknesses()
-	{
-		return this.weaknesses;
-	} // end getWeaknesses
+  public String getStrengths()
+  {
+	return this.strengths;
+  } // end getStrengths
 	
-	public void setWage(double wage)
-	{
-		this.wage = wage;
-	} // end setWage
+  public String getWeaknesses()
+  {
+	return this.weaknesses;
+  } // end getWeaknesses
+	
+  public void setWage(double wage)
+  {
+	this.wage = wage;
+  } // end setWage
 	
   public void setAge(int age)
   {

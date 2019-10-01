@@ -82,6 +82,11 @@ public class Items
 	}
   } // end loadItems
 
+  
+  // ***********************************************
+  
+  //  Default way to load in Items
+  
   public void loadItems() 
   {
 	Items.add(new Items("Reese's", "Candy", 1));
