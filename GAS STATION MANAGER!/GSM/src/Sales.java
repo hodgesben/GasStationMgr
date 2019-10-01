@@ -1,14 +1,14 @@
 public class Sales
 {
-   private int numOfSales;
+  private int numOfSales;
    
-   Sales()
-   {
-	  numOfSales = 0;
-   }
+  Sales()
+  {
+	numOfSales = 0;
+  }
    
-   public int numOfSales()
-   {
-	   return numOfSales;
-   }
-}
+  public int numOfSales()
+  {
+    return numOfSales;
+  }
+} // end Sales

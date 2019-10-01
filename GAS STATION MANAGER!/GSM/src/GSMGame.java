@@ -11,15 +11,16 @@ import java.util.Scanner;
 
 public class GSMGame 
 {
-	private static int money = 10000;        // amount of money Person has
-	private static Store store = new Store("QuickTrip", 20000, "DownTown"); // Initializing  store class
-	private static Employee employee = new Employee();
-	private static Items items = new Items();
+  private static int money = 10000;                                       // amount of Player has
+  private static Store store = new Store("QuickTrip", 20000, "DownTown"); // Initializing  store class
+  private static Employee employee = new Employee();
+  private static Items items = new Items();
+  private static int numOfDays = 0;
 	
-	public static void main(String[] args) 
+  public static void main(String[] args) 
   {
-		items.loadItems();
-		items.printItemsInfo(items.getItemsArry());
+	items.loadItems();
+	items.printItemsInfo(items.getItemsArry());
     employee.loadEmployees();
   	printInstructions();
   	displayMainMenu();
@@ -139,16 +140,16 @@ public class GSMGame
 	{
 		Scanner std = new Scanner(System.in);
 		
-		if(store.Employees.size() > 0)    // If there is employees available to fire
+		if(store.getEmployeeArry().size() > 0)    // If there is employees available to fire
 		{
 			System.out.println("Give Employee Raise");
 			System.out.println("-------------------------------------------");
 			System.out.println("Select the Number of the Employee You wish to Give a raise\n");
-	  	System.out.println(store.printEmployeeInfo(store.Employees));
+	  	System.out.println(store.printEmployeeInfo(store.getEmployeeArry()));
 	  	try
 	  	{
 				int userPick = std.nextInt();	
-				store.giveEmployeeRaise(userPick, store.Employees);
+				store.giveEmployeeRaise(userPick, store.getEmployeeArry());
 	  	}
 	  	catch(Exception e)
 	  	{
@@ -177,18 +178,18 @@ public class GSMGame
 	{
 		Scanner std = new Scanner(System.in);
 		
-		if(store.Employees.size() > 0)    // If there is employees available to fire
+		if(store.getEmployeeArry().size() > 0)    // If there is employees available to fire
 		{
 			System.out.println("Fire Emplyee");
 			System.out.println("---------------------------------------------");
 			System.out.println("Heres a list of Your Employees at " + store.getName());
 			System.out.println("Select the Number of the Employee You wish to Fire\n");
 			
-	  	System.out.println(store.printEmployeeInfo(store.Employees));
+	  	System.out.println(store.printEmployeeInfo(store.getEmployeeArry()));
 	  	try
 	  	{
 				int userPick = std.nextInt();	
-				store.fireEmployee(userPick, employee.employeeList);
+				store.fireEmployee(userPick, employee.getEmployeeArry());
 	  	}
 	  	catch(Exception e)
 	  	{
@@ -216,17 +217,17 @@ public class GSMGame
 	{
 		Scanner std = new Scanner(System.in);
 		
-		if(employee.employeeList.size() > 0)    // If there is employees available to hire
+		if(employee.getEmployeeArry().size() > 0)    // If there is employees available to hire
 		{
 			System.out.println("Hire Employee");
 			System.out.println("---------------------------------------------");
 			System.out.println("Heres a list of possible Employees To Hire at " + store.getName());
 			System.out.println("Select the Number of the Employee You wish to hire\n");
-	  	System.out.println(store.printEmployeeInfo(employee.employeeList));
+	  	System.out.println(store.printEmployeeInfo(employee.getEmployeeArry()));
 	  	try
 	  	{
 				int userPick = std.nextInt();	
-				store.hireEmployee(userPick , employee.employeeList);
+				store.hireEmployee(userPick , employee.getEmployeeArry());
 	  	}
 	  	catch(Exception e)
 	  	{
@@ -235,32 +236,32 @@ public class GSMGame
 	  	}
 			manageEmployeesMenu();
 		}
-		else
-		{
-			System.out.println("There are No Employees To Hire at this Time try again later\n");
-			System.out.println("Press Enter To Continue");
-			std.nextLine();
-			manageEmployeesMenu();
-		}
-	} // end hireEMployee
-
-	private static void goToNextDay()
+	else
 	{
-		dailySim();
-		System.out.println("Yesturday's Information");
-		System.out.println("---------------------------");
-		System.out.println(getDailyInfo());
-		
-		displayMainMenu();
+	  System.out.println("There are No Employees To Hire at this Time try again later\n");
+	  System.out.println("Press Enter To Continue");
+	  std.nextLine();
+	  manageEmployeesMenu();
 	}
+  } // end hireEMployee
+
+  private static void goToNextDay()
+  {
+	dailySim();
+	System.out.println("Yesturday's Information");
+	System.out.println("---------------------------");
+	System.out.println(getDailyInfo());
+		
+	displayMainMenu();
+  }
 	
-	private static void dailySim()
-	{
-		
-	}
+  private static void dailySim()
+  {
+	numOfDays++;
+  }
 
-	private static String getDailyInfo()
-	{
-		return "";
-	}
+  private static String getDailyInfo()
+  {
+	return "Current Money: " + money + "\nCurrent Day: " + numOfDays + "\nNumber of Items Sold: ";
+  }
 }  // end GSMGame

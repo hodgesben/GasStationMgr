@@ -2,15 +2,15 @@ import java.util.ArrayList;
 
 public class Employee 
 {
-	private final String name;         // name of the Employee
-	private int age;                   // age of Employee
-	private double wage;               // Monthly Wage of Employee
-	private final int rating;          // Rating of Employee 0-5
-	private final String strengths;    // Strength of the Employee 
-	private final String weaknesses;   // weakness of the Employee
+  private final String name;         // name of the Employee
+  private int age;                   // age of Employee
+  private double wage;               // Monthly Wage of Employee
+  private final int rating;          // Rating of Employee 0-5
+  private final String strengths;    // Strength of the Employee 
+  private final String weaknesses;   // weakness of the Employee
 	
-	// Create an ArrayList of Possible Employees up for Hire
-	public ArrayList<Employee> employeeList = new ArrayList<Employee>(); 
+  // Create an ArrayList of Possible Employees up for Hire
+  private ArrayList<Employee> Employees = new ArrayList<Employee>(); 
 
 	// **********************************************************
 	
@@ -44,9 +44,9 @@ public class Employee
 	{
 		//	employee[i] =  new Employee
 		 //      (String name, int age, double wage,String rating,String strengths,String weaknesses);
-		employeeList.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant"));
-		employeeList.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job"));
-		employeeList.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant"));
+		Employees.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant"));
+		Employees.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job"));
+		Employees.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant"));
 		
 	} // end loadEmployees
 	
@@ -93,13 +93,17 @@ public class Employee
 		this.wage = wage;
 	} // end setWage
 	
-	public void setAge(int age)
-	{
-		this.age = age;
-	} // end setAge
+  public void setAge(int age)
+  {
+	this.age = age;
+  } // end setAge
 
-	public int getRating()
-	{
-		return this.rating;
-	}
-} // end Emmployee
+  public int getRating()
+  {
+	return this.rating;
+  }
+  public ArrayList<Employee> getEmployeeArry()
+  {
+	return Employees;
+  }
+} // end Employee
