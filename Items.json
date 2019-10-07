@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+    "catagory": "Candy",
+    "name": "Twix",
+    "price": 1.50
+   },
+   {
+    "catagory": "Candy",
+    "name": "Skittles",
+    "price": 1.50
+  },
+  {
+    "catagory": "Candy",
+    "name": "Kit-Kat",
+    "price": 1.50
+  }
+  ]
+}
