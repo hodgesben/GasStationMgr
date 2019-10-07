@@ -79,12 +79,12 @@ public class Store
     this.name = name;
   } // end setName
 
-  public String printEmployeeInfo(ArrayList<Employee> curEmployees)
+  public String printEmployeeInfo()
   {
 	String tempString = "";
-	for(int i=0; i<curEmployees.size(); i++)
+	for(int i=0; i<Employees.size(); i++)
 	{
-	  tempString += i + ".\n" + curEmployees.get(i).printInfo() + "\n";
+	  tempString += i + ".\n" + Employees.get(i).printInfo() + "\n";
 	}
 	return tempString;
   } // end printEmployeeInfo
@@ -94,28 +94,20 @@ public class Store
 	// Hires an employee from the list of employees
 	// Puts it in the Employee Array List
 
-  public void hireEmployee(int userPick, ArrayList<Employee> employee)
+  public void hireEmployee(Employee employee)
   {
-	String name;
-	int age;
-	double wage;
-	int rating;
-	String strength;
-	String weakness;
-	int hireDay;
-	
     try
     {
-	  name = employee.get(userPick).getName();
-	  age =  employee.get(userPick).getAge();	
-	  wage =  employee.get(userPick).getWage();
-	  rating =  employee.get(userPick).getRating();
-  	  strength =  employee.get(userPick).getStrengths();
-	  weakness =  employee.get(userPick).getWeaknesses();
-      hireDay = game.getNumOfDays();
+	  String name = employee.getName();
+	  int age =  employee.getAge();	
+	  double wage =  employee.getWage();
+	  int rating =  employee.getRating();
+  	  String strength =  employee.getStrengths();
+	  String weakness =  employee.getWeaknesses();
+      int hireDay = game.getNumOfDays();
       
 	  Employees.add(new Employee(name, age, wage, rating, strength, weakness, hireDay));
-	  employee.remove(userPick);
+	  
 	
 	  System.out.println(name + " successfully added as a new Employee\n");
     }
@@ -125,27 +117,12 @@ public class Store
     }
   }  // end hireEmployee
 	
-  public void fireEmployee(int userPick, ArrayList<Employee> employee)
+  public void fireEmployee(int userPick)
   {	
-	String name;
-	int age;
-	double wage;
-	int rating;
-	String strength;
-    String weekness;
-    int hireDay;
-
+	name = Employees.get(userPick).getName();
+	
 	try
 	{
-	  name = Employees.get(userPick).getName();
-	  age = Employees.get(userPick).getAge();
-	  wage = Employees.get(userPick).getWage();
-	  rating = Employees.get(userPick).getRating();
-	  strength = Employees.get(userPick).getStrengths();
-	  weekness = Employees.get(userPick).getWeaknesses();
-	  hireDay = game.getNumOfDays();
-	  
-	  employee.add(new Employee(name, age, wage, rating, strength, weekness, hireDay));
 	  Employees.remove(userPick);
 	  System.out.println(name + " successfully fired as an Employee\n");
    	}
@@ -155,18 +132,27 @@ public class Store
 	}
   } // end fireEmployee
 	
-  public void giveEmployeeRaise(int userPick, ArrayList<Employee> employee)
+  // ***************************************************************
+  
+  //  Gives a Default raise of $50 dollars to the employee based on user pick
+  
+  public void giveEmployeeRaise(Employee employee)
   {
 	try
 	{
-	  double curentWage = employee.get(userPick).getWage();
+	  double curentWage = employee.getWage();
 	  
-	  employee.get(userPick).setWage(curentWage += 50);		
-	  System.out.println("You succefully gave " + employee.get(userPick).getName() + " a $50 a month raise.\n");
+	  employee.setWage(curentWage += 50);		
+	  System.out.println("You succefully gave " + employee.getName() + " a $50 a month raise.\n");
 	}
 	catch(Exception e)
 	{
 	  System.out.println("Try Again. Please select a valid Number\n");
 	}
   } // end giveEmployeeRaise
+
+  public void reRollEmployees() 
+  {
+	
+  } // end reRollEmployees
 } // end Store

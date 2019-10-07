@@ -11,8 +11,9 @@ public class Employee
   private final String weaknesses;   // weakness of the Employee
 	
   // Create an ArrayList of Possible Employees up for Hire
-  private ArrayList<Employee> Employees = new ArrayList<Employee>(); 
+  private static ArrayList<Employee> Employees = new ArrayList<Employee>(); 
   private static GSMGame game = new GSMGame();
+  
   // **********************************************************
 	
   // Default Constructor
@@ -94,7 +95,17 @@ public class Employee
   {
 	return this.hireDate;
   } // end getHireDate
-	
+
+  public int getRating()
+  {
+	return this.rating;
+  } // end getRating
+  
+  public ArrayList<Employee> getEmployeeArry()
+  {
+	return Employees;
+  } // end getEmployeeArry
+  
   public void setWage(double wage)
   {
 	this.wage = wage;
@@ -105,12 +116,13 @@ public class Employee
 	this.age = age;
   } // end setAge
 
-  public int getRating()
+  public static String printEmployeeInfo()
   {
-	return this.rating;
-  }
-  public ArrayList<Employee> getEmployeeArry()
-  {
-	return Employees;
-  }
+    String tempString = "";
+	for(int i=0; i<Employees.size(); i++)
+	{
+	  tempString += i + ".\n" + Employees.get(i).printInfo() + "\n";
+	}
+	return tempString;
+  } // end printEmployeeInfo
 } // end Employee

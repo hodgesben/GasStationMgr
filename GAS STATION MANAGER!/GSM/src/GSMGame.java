@@ -12,15 +12,15 @@ import java.util.Scanner;
 public class GSMGame 
 {
   private static int money = 10000;                                       // amount of Player has
-  private static Store store = new Store("QuickTrip", 20000, "DownTown"); // Initializing  store class
+  private static Store store = new Store("QuickTrip", 20000, "DownTown"); // Initializing store class
   private static Employee employee = new Employee();
   private static Items items = new Items();
   private static int numOfDays = 1;
 	
   public static void main(String[] args) 
   {
-	items.loadItemsJSON();
-//	items.printItemsInfo(items.getItemsArry());
+	items.loadItems();
+//	items.printItemsInfo();
     employee.loadEmployees();
   	printInstructions();
   	displayMainMenu();
@@ -74,7 +74,6 @@ public class GSMGame
 	  	  System.out.println("Enter a valid Number and Try again");; 
 	  }
   	} while (userPick != 4);
-  	std.close();
   } // end displayMainMenu
 	
   //*********************************************************
@@ -134,19 +133,19 @@ public class GSMGame
 	
   //*********************************************************
   
-  // 
+  // Gives a Default raise of $50 dollars to the employee
 
   private static void giveEmployeeRaise()
   {
 	Scanner std = new Scanner(System.in);
 		
-	if(store.getEmployeeArry().size() > 0)    // If there is employees available to fire
+	if(!store.getEmployeeArry().isEmpty())    // If there is employees available to fire
 	{
 	  System.out.println("Give Employee Raise");
 	  System.out.println("-------------------------------------------");
 	  System.out.println("Select the Number of the Employee You wish to Give a raise\n");
 	  System.out.println("Or type -1 to return to Manage Employee Main Menu\n");
-	  System.out.println(store.printEmployeeInfo(store.getEmployeeArry()));
+	  System.out.println(store.printEmployeeInfo());
 	  try
 	  {
 		int userPick = std.nextInt();	
@@ -156,7 +155,7 @@ public class GSMGame
 		}
 		else
 		{
-		  store.giveEmployeeRaise(userPick, store.getEmployeeArry());
+		  store.giveEmployeeRaise(store.getEmployeeArry().get(userPick));
 		}
 	  }
 	  catch(Exception e)
@@ -186,14 +185,14 @@ public class GSMGame
   {
 	Scanner std = new Scanner(System.in);
 		
-	if(store.getEmployeeArry().size() > 0)    // If there is employees available to fire
+	if(!store.getEmployeeArry().isEmpty())    // If there is employees available to fire
 	{
 	  System.out.println("Fire Emplyee");
 	  System.out.println("---------------------------------------------");
 	  System.out.println("Heres a list of Your Employees at " + store.getName());
 	  System.out.println("Select the Number of the Employee You wish to Fire");
 	  System.out.println("Or type -1 to return to Manage Employee Main Menu\n");
-	  System.out.println(store.printEmployeeInfo(store.getEmployeeArry()));
+	  System.out.println(store.printEmployeeInfo());
 	  
 	  try
 	  {
@@ -204,7 +203,7 @@ public class GSMGame
 		}
 		else
 		{
-		  store.fireEmployee(userPick, employee.getEmployeeArry());
+		  store.fireEmployee(userPick);
 		}
 	  }
 	  catch(Exception e)
@@ -212,7 +211,7 @@ public class GSMGame
 	  	System.out.println("Enter a Valid  Number\n");
 	  	fireEmployee();
 	  }
-	}
+	} // end if
 	else
 	{
 	  System.out.println("You do not have any employees at this time\n");
@@ -232,14 +231,14 @@ public class GSMGame
   {
 	Scanner std = new Scanner(System.in);
 		
-	if(employee.getEmployeeArry().size() > 0)    // If there is employees available to hire
+	if(!employee.getEmployeeArry().isEmpty())    // If there is employees available to hire
 	{
 	  System.out.println("Hire Employee");
 	  System.out.println("---------------------------------------------");
 	  System.out.println("Heres a list of possible Employees To Hire at " + store.getName());
 	  System.out.println("Select the Number of the Employee You wish to hire");
 	  System.out.println("Or type -1 to return to Manage Employee Main Menu\n");
-	  System.out.println(store.printEmployeeInfo(employee.getEmployeeArry()));
+	  System.out.println(Employee.printEmployeeInfo());
 	  
 	  try
 	  {
@@ -251,7 +250,9 @@ public class GSMGame
 		else
 		{
 		  money -= employee.getEmployeeArry().get(userPick).getWage();
-		  store.hireEmployee(userPick , employee.getEmployeeArry());
+		  store.hireEmployee(employee.getEmployeeArry().get(userPick));
+		  // removes it from employee array after adding it to the store array
+		  employee.getEmployeeArry().remove(userPick);    
 		}
 	  }
 	  catch(Exception e)
@@ -272,12 +273,24 @@ public class GSMGame
 
   private static void goToNextDay()
   {
-	dailySim();
-	System.out.println("Yesturday's Information");
-	System.out.println("---------------------------");
-	printDailyInfo();
+	if(store.getEmployeeArry().isEmpty())
+	{
+	  System.out.println("You need to hire an employee before continuing");
+	}
+	else if(store.getItemsArry().isEmpty())
+	{
+	  System.out.println("You don't have any items in your store.");
+	  System.out.println("Go to the Buy Inventory menu to purchase some before going to the next day.");
+	}
+	else
+	{
+	  dailySim();
+	  System.out.println("Yesturday's Information");
+	  System.out.println("---------------------------");
+      printDailyInfo();
+	}
 	displayMainMenu();
-  }
+  } // end goToNextDay
   
   // *********************************************************************
   
@@ -286,17 +299,19 @@ public class GSMGame
   private static void dailySim()
   {
 	numOfDays++;  // increment number of days
-	int j;
 	
 	// Checks the array of employees to see if any need their monthly paycheck
 	for(int i=0; i<store.getEmployeeArry().size(); i++)
 	{
-		j = (store.getEmployeeArry().get(i).getHireDate());
-		System.out.println(j);
 	  if(((numOfDays - store.getEmployeeArry().get(i).getHireDate()) % 30) == 0)
 	  {
 		money -= store.getEmployeeArry().get(i).getWage();	
 	  }
+	}
+	
+	if(numOfDays % 7 == 0)   // checks to see if its a new week
+	{
+	  store.reRollEmployees();
 	}
   } // end dailySim
   
@@ -310,9 +325,9 @@ public class GSMGame
 	System.out.println("Current Day: " + numOfDays);
 	System.out.println("Number of Items Sold: ");
   }
-  
+
   public int getNumOfDays()
   {
 	return numOfDays;
-  }
+  } // end getNumOfDays
 }  // end GSMGame
