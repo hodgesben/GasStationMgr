@@ -9,6 +9,10 @@ public class Employee
   private final int rating;          // Rating of Employee 0-5
   private final String strengths;    // Strength of the Employee 
   private final String weaknesses;   // weakness of the Employee
+  
+  private String[] strength = {"Fast", "Friendly", "Happy"};
+  private String[] weakness = {"Slow", "Mean", "Angry"};
+  
 	
   // Create an ArrayList of Possible Employees up for Hire
   private ArrayList<Employee> Employees = new ArrayList<Employee>(); 
@@ -48,13 +52,33 @@ public class Employee
 	
   public void loadEmployees()
   {
-	Employees.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant", game.getNumOfDays()));
-	Employees.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job", game.getNumOfDays()));
-	Employees.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant", game.getNumOfDays()));	
+	//Employees.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant", game.getNumOfDays()));
+	//Employees.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job", game.getNumOfDays()));
+	//Employees.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant", game.getNumOfDays()));
+	for (int i=0; i<10; i++)
+	{
+	Employees.add(new Employee(combineName(), (int) (Math.random() * 45) + 18, 350, (int) (Math.random() * 4), 
+			strength[(int) (Math.random() * strength.length)], weakness[(int) (Math.random() * weakness.length)], game.getNumOfDays()));
+	}
   } // end loadEmployees
 	
   // **********************************************************
+  
+  // Creates full name for employees
+  
+  private static String combineName()
+  {
+	  String[] firstName = {"Ben", "Brennan", "Katy", "Shean", "Calen", "Derek", "Dave"};
+	  String[] lastName = {"Hodges", "Meyers", "Keeling", "Packer", "Flower", "Manning", "Maholmes"};
+	  String fullName;	  
+	  fullName = (firstName[(int) (Math.random() * firstName.length)] + 
+			  " " + lastName[(int) (Math.random() * lastName.length)]);
 	
+	  return fullName;
+  } //end combineName
+  
+  //**********************************************************
+  
   // Returns a string of all the information about the Employee
 	
   public String printInfo() 

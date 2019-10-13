@@ -4,32 +4,32 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class Items
 {
-  private final String catagory;
+  private final String category;
   private final String name;
   private int count;
   private final double buyPrice;
   private double sellPrice;
-  private final String[] itemsCatagory = new String[] {"Beer", "Candy", "Food", "Drinks", "Snacks"};
+  public final String[] itemsCategory = new String[] {"Beer", "Candy", "Food", "Drinks", "Snacks"};
   private ArrayList<Items> Items = new ArrayList<Items>();  
 	
   // ***********************************************
   
   //  Constructor sets all the base Item information
   
-  public Items(String name, String catagory, double buyPrice)
+  public Items(String name, String category, double buyPrice)
   {
-  	this.catagory = catagory;
+  	this.category = category;
   	this.name = name;
   	this.buyPrice = buyPrice;
   } // end constructor
 	
   public Items()
   {
-	catagory = "";
+	category = "";
 	name = "";
 	buyPrice = 0;
 	sellPrice = 0;
-  } // end defualt constructor
+  } // end default constructor
   
   public ArrayList<Items> getItemsArry()
   {
@@ -38,14 +38,15 @@ public class Items
   
   public String printInfo() 
   {
-	return "Name: " + this.name + "\nCatagory: " + this.catagory 
-	  + "\nBuy Price: $" + this.buyPrice + "\nSell Price: $" + this.sellPrice + "\n";
+	String info = "Name: " + this.name + "\nCategory: " + this.category 
+			  + "\nBuy Price: $" + this.buyPrice + "\nSell Price: $" + this.sellPrice + "\n";
+	return info;
   }  // end getInfo
 	
-  public String getCatagory()
+  public String getCategory()
   {
-	return this.catagory;
-  } // end getCatagory
+	return this.category;
+  } // end getCategory
 	
   public String getName()
   {
@@ -74,7 +75,7 @@ public class Items
 	  Items[] myPojo = mapper.readValue(new File("C:/Users/Ben/git/GasStationMgr/GAS STATION MANAGER!/GSM/Items.json"), Items[].class);
 	  for(int i=0; i < myPojo.length; i++)
 	  {
-	  	Items.add(new Items(myPojo[i].getName(), myPojo[i].getCatagory(), myPojo[i].getBuyPrice()));
+	  	Items.add(new Items(myPojo[i].getName(), myPojo[i].getCategory(), myPojo[i].getBuyPrice()));
 	  }
 	}
 	catch(Exception e)
@@ -96,6 +97,7 @@ public class Items
 	Items.add(new Items("Bud-Light", "Beer", 10));
 	Items.add(new Items("Natural Light", "Beer", 7));
 	Items.add(new Items("Boulevard",  "Beer", 12));
+	System.out.println("Items Loaded");
   } // end loadItems
   
   public void printItemsInfo(ArrayList<Items> arrayList)
@@ -105,5 +107,29 @@ public class Items
 	  System.out.println(arrayList.get(i).printInfo());
 	}
   }  // end printItemsInfo
+  
+  public void printCategories()
+  {
+	  for(int i=0; i<itemsCategory.length; i++)
+	  {
+		  System.out.println( (i+1) + ". " + itemsCategory[i] + " Items");
+	  }
+	  System.out.println("6. Main Menu");
+  }
+  
+  public void searchItems(int userPick)
+  {
+	int j=1;
+	  
+	for(int i=0; i<Items.size(); i++)
+	{
+      if(Items.get(i).getCategory().equals(itemsCategory[userPick-1]))
+	  {
+	    System.out.println(j + ". " + Items.get(i).printInfo());
+	    j++;
+      }
+	}
+	System.out.println("Select a new category or return to main menu.");
+  } // end SearchItems  
 } // end Items
 

@@ -19,7 +19,7 @@ public class GSMGame
 	
   public static void main(String[] args) 
   {
-	items.loadItemsJSON();
+	items.loadItems();
 //	items.printItemsInfo(items.getItemsArry());
     employee.loadEmployees();
   	printInstructions();
@@ -83,11 +83,27 @@ public class GSMGame
 
   private static void buyItems()
   {
+	
+    Scanner std = new Scanner(System.in);
+	int userPick = -1; 
 	System.out.println("Buy Items Menu");
 	System.out.println("-----------------------------------");
-	System.out.println("Candy Items");
-	System.out.println("Soda Items");
-	System.out.println("Food Items");
+	items.printCategories();
+	do {
+	      userPick = std.nextInt();
+		  switch(userPick)
+		  {
+		  	case 1: case 2: case 3: case 4: case 5:
+		  	  items.searchItems(userPick);
+		  	  break;
+		  	case 6:
+		  	  displayMainMenu();
+		  	  break;
+		  	default:
+		  	  System.out.println("Enter a valid Number and Try again");
+		  }
+	  	} while (userPick != 6);
+	  	std.close();
   }
 
   //*********************************************************
