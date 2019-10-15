@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
+
 public class Employee 
 {
   private final String name;         // name of the Employee
   private int age;                   // age of Employee
   private double wage;               // Monthly Wage of Employee
-  private int hireDate;              // Day that the employee gets hired
+  private String hireDate;              // Day that the employee gets hired
   private final int rating;          // Rating of Employee 0-5
   private final String strengths;    // Strength of the Employee 
   private final String weaknesses;   // weakness of the Employee
 	
   // Create an ArrayList of Possible Employees up for Hire
-  private static ArrayList<Employee> Employees = new ArrayList<Employee>(); 
-  private static GSMGame game = new GSMGame();
+  private static ArrayList<Employee> EmployeesArry = new ArrayList<Employee>(); 
   
   // **********************************************************
 	
@@ -27,12 +27,12 @@ public class Employee
 	this.strengths = "";
 	this.weaknesses = "";
   }
-	
+  
   // **********************************************************
 	
   // Load in values to the EMployee object
   
-  public Employee(String name, int age, double wage, int rating, String strengths, String weaknesses, int hireDay)
+  public Employee(String name, int age, double wage, int rating, String strengths, String weaknesses, String hireDay)
   {
 	this.name = name;
 	this.age = age;
@@ -49,9 +49,9 @@ public class Employee
 	
   public void loadEmployees()
   {
-	Employees.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant", game.getNumOfDays()));
-	Employees.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job", game.getNumOfDays()));
-	Employees.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant", game.getNumOfDays()));	
+	EmployeesArry.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant", ""));
+	EmployeesArry.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job", ""));
+	EmployeesArry.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant", ""));	
   } // end loadEmployees
 	
   // **********************************************************
@@ -91,7 +91,7 @@ public class Employee
 	return this.weaknesses;
   } // end getWeaknesses
   
-  public int getHireDate()
+  public String getHireDate()
   {
 	return this.hireDate;
   } // end getHireDate
@@ -103,7 +103,7 @@ public class Employee
   
   public ArrayList<Employee> getEmployeeArry()
   {
-	return Employees;
+	return EmployeesArry;
   } // end getEmployeeArry
   
   public void setWage(double wage)
@@ -119,9 +119,9 @@ public class Employee
   public static String printEmployeeInfo()
   {
     String tempString = "";
-	for(int i=0; i<Employees.size(); i++)
+	for(int i=0; i<EmployeesArry.size(); i++)
 	{
-	  tempString += i + ".\n" + Employees.get(i).printInfo() + "\n";
+	  tempString += i + ".\n" + EmployeesArry.get(i).printInfo() + "\n";
 	}
 	return tempString;
   } // end printEmployeeInfo

@@ -6,8 +6,10 @@
  * 
  *******************************/
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
-
 
 public class GSMGame 
 {
@@ -15,14 +17,18 @@ public class GSMGame
   private static Store store = new Store("QuickTrip", 20000, "DownTown"); // Initializing store class
   private static Employee employee = new Employee();
   private static Items items = new Items();
-  private static int numOfDays = 1;
-	
+  private static Calendar cal = new GregorianCalendar();
+  private static int weekOfYearNum = cal.get(Calendar.WEEK_OF_YEAR);
+  private static DateFormat dateFormatter = DateFormat.getDateInstance();    // Date
+  private static DateFormat timeFormatter = DateFormat.getTimeInstance();    // Time
+  
   public static void main(String[] args) 
   {
+	printInstructions();
+    
 	items.loadItems();
 //	items.printItemsInfo();
     employee.loadEmployees();
-  	printInstructions();
   	displayMainMenu();
   } // end main
 	
@@ -46,11 +52,12 @@ public class GSMGame
   {
     Scanner std = new Scanner(System.in);
 	int userPick = -1; 
+	System.out.println("Today's Date: " +  dateFormatter.format(cal.getTime()));
 	System.out.println("MAIN MENU\n");
 	System.out.println("Enter the number of your Choosing");
 	System.out.println("--------------------------");
 	System.out.println("1. Sell Items/Day Advance");
-	System.out.println("2. Buy Inventory");
+	System.out.println("2. Manage Inventory");
 	System.out.println("3. Manage Employees");
 	System.out.println("4. Quit Game");
 		
@@ -62,7 +69,7 @@ public class GSMGame
 	  	  goToNextDay();
 	  	  break;
 	  	case 2:  // buyItemsMenu
-	  	  buyItems();
+		  manageItemsMenu();
 	  	  break;
 	  	case 3:  // Employee Menu
 	  	  manageEmployeesMenu();
@@ -76,7 +83,50 @@ public class GSMGame
   	} while (userPick != 4);
   } // end displayMainMenu
 	
-  //*********************************************************
+  private static void manageItemsMenu() 
+  {
+	int userPick = -1;
+	System.out.println("Manage Employees Menu");
+	System.out.println("Enter the number of your Choosing");
+	System.out.println("--------------------------");
+	System.out.println("1. Buy Items");
+	System.out.println("2. Veiw Current Items");
+	System.out.println("3. Main Menu");
+	System.out.println("--------------------------");
+			
+	  	do {
+	  	  Scanner std = new Scanner(System.in);
+	  		
+	      userPick = std.nextInt();
+	    	
+		  switch(userPick)
+		  {
+		  	case 1:
+		  	  buyItems();
+		  	  break;
+		  	case 2:
+		  	  if(!store.getItemsArry().isEmpty())
+		  	  {
+			  	  System.out.println(store.printItemsInfo());
+		  	  }
+		  	  else
+		  	  {
+		  		System.out.println("You do not have any items at this time");
+		  		System.out.println("Press Enter To Continue\n");
+		  		std.nextLine();
+		  		manageItemsMenu();
+		  	  }
+		  	  break;
+		  	case 3:
+			  displayMainMenu();
+			  break;
+		  	default:
+		  	  System.out.println("Enter a valid Number and Try again");
+		  }
+	  	} while(userPick != 3);
+  } // end manageItemsMenu
+
+//*********************************************************
   
   // Prints out the buy Items
 
@@ -277,16 +327,16 @@ public class GSMGame
 	{
 	  System.out.println("You need to hire an employee before continuing");
 	}
-	else if(store.getItemsArry().isEmpty())
-	{
-	  System.out.println("You don't have any items in your store.");
-	  System.out.println("Go to the Buy Inventory menu to purchase some before going to the next day.");
-	}
+//	else if(store.getItemsArry().isEmpty())
+//	{
+	//  System.out.println("You don't have any items in your store.");
+	//  System.out.println("Go to the Buy Inventory menu to purchase some before going to the next day.");
+//	}
 	else
 	{
-	  dailySim();
-	  System.out.println("Yesturday's Information");
+	  System.out.println(dateFormatter.format(cal.getTime()) + " Sales Information");
 	  System.out.println("---------------------------");
+	  dailySim();
       printDailyInfo();
 	}
 	displayMainMenu();
@@ -298,36 +348,96 @@ public class GSMGame
 	
   private static void dailySim()
   {
-	numOfDays++;  // increment number of days
-	
+	cal.add(Calendar.DATE, 1); // increment number of days
+
 	// Checks the array of employees to see if any need their monthly paycheck
 	for(int i=0; i<store.getEmployeeArry().size(); i++)
 	{
-	  if(((numOfDays - store.getEmployeeArry().get(i).getHireDate()) % 30) == 0)
-	  {
+	  String employeeDateString = store.getEmployeeArry().get(i).getHireDate();
+	  
+	  if((cal.get(Calendar.DATE) == getDayInt(employeeDateString))
+		&& (cal.get(Calendar.MONTH) != getMonthInt(employeeDateString)))
+	 {
 		money -= store.getEmployeeArry().get(i).getWage();	
-	  }
+     }
 	}
 	
-	if(numOfDays % 7 == 0)   // checks to see if its a new week
+	 // checks to see if its a new week
+	 // swaps a new 5 employees out and in every Sunday
+	if(weekOfYearNum != cal.get(Calendar.WEEK_OF_YEAR))   
 	{
+	  weekOfYearNum = cal.get(Calendar.WEEK_OF_YEAR);
 	  store.reRollEmployees();
 	}
   } // end dailySim
   
-  // **********************************************************************
+  private static int getDayInt(String employeeDateString) 
+  {
+	int spaceIndex = employeeDateString.indexOf(' ');
+	employeeDateString = employeeDateString.substring(spaceIndex + 1, spaceIndex + 2);
+	return Integer.parseInt(employeeDateString);
+  }
+
+  private static int getMonthInt(String employeeDateString) 
+  {
+	int employeeDate = -1;
+	employeeDateString = employeeDateString.substring(0, employeeDateString.indexOf(' '));
+	  
+	switch(employeeDateString)
+	{
+	  case "Jan":
+		  employeeDate = 0;
+		  break;
+	  case "Feb":
+		  employeeDate = 1;
+		  break;
+	  case "Mar":
+		  employeeDate = 2;
+		  break;
+	  case "Apr":
+		  employeeDate = 3;
+		  break;
+	  case "May":
+		  employeeDate = 4;
+		  break;
+	  case "Jun":
+		  employeeDate = 5;
+		  break;
+	  case "Jul":
+		  employeeDate = 6;
+		  break;
+	  case "Aug":
+		  employeeDate = 7;
+	  case "Sep":
+		  employeeDate = 8;
+		  break;
+	  case "Oct":
+		  employeeDate = 9;
+		  break;
+	  case "Nov":
+		  employeeDate = 10;
+		  break;
+	  case "Dec":
+		  employeeDate = 11;
+		  break;
+	}
+	return employeeDate;
+  } // end getMonthInt
+
+// **********************************************************************
   
   // Prints the information that happened that day.
 
   private static void printDailyInfo()
   {
 	System.out.println("Current Money: $" + money);
-	System.out.println("Current Day: " + numOfDays);
 	System.out.println("Number of Items Sold: ");
+	System.out.println("-----------------------");
+	System.out.println("");
   }
 
-  public int getNumOfDays()
+  public Calendar getStartDate()
   {
-	return numOfDays;
+	return cal;
   } // end getNumOfDays
 }  // end GSMGame

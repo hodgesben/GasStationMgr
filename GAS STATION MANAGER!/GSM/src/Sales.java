@@ -7,7 +7,7 @@ public class Sales
 	numOfSales = 0;
   } // end default constructor
    
-  public int numOfSales()
+  public int getNumOfSales()
   {
     return numOfSales;
   } // end numOfSales
