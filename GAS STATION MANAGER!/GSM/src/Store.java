@@ -1,14 +1,12 @@
 import java.util.ArrayList; // import the ArrayList class
-import java.text.DateFormat;
 
 public class Store 
 {
   private String name;                   // name of the store
   private final int price;               // price to buy store
   private final String location;         // where store is located
-  private static GSMGame game = new GSMGame();
-  
-  private static DateFormat dateFormatter = DateFormat.getDateInstance();    // Date
+  private static Cal cal = new Cal();
+
   // Create an ArrayList of Current Employees at the Store
   private ArrayList<Employee> Employees = new ArrayList<Employee>();  
 	
@@ -89,10 +87,12 @@ public class Store
   {
 	String tempString = "";
 	for(int i=0; i<Employees.size(); i++)
-	{
-	  tempString += i + ".\n" + Employees.get(i).printInfo() + "\n";
-	}
+{
+	 tempString += i + ".\n" + Employees.get(i).printInfo() + "\n";
+}
 	return tempString;
+
+	
   } // end printEmployeeInfo
 	
   //**************************************************
@@ -122,7 +122,7 @@ public class Store
 	  int rating =  employee.getRating();
   	  String strength =  employee.getStrengths();
 	  String weakness =  employee.getWeaknesses();
-      String hireDay = dateFormatter.format(game.getStartDate().getTime());
+      String hireDay = cal.getDate();
       
 	  Employees.add(new Employee(name, age, wage, rating, strength, weakness, hireDay));
 	  
