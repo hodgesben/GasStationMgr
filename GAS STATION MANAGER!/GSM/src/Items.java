@@ -42,7 +42,7 @@ public class Items
 	  + "\nBuy Price: $" + this.buyPrice + "\nSell Price: $" + this.sellPrice + "\n";
   }  // end getInfo
 	
-  public String getCatagory()
+  public String getCategory()
   {
 	return this.category;
   } // end getCatagory
@@ -76,7 +76,7 @@ public class Items
 		new File("C:/Users/Ben/git/GasStationMgr/GAS STATION MANAGER!/GSM/Items.json"), Items[].class);
 	  for(int i=0; i < myPojo.length; i++)
 	  {
-		itemsArray.add(new Items(myPojo[i].getName(), myPojo[i].getCatagory(), myPojo[i].getBuyPrice()));
+		itemsArray.add(new Items(myPojo[i].getName(), myPojo[i].getCategory(), myPojo[i].getBuyPrice()));
 	  }
 	}
 	catch(Exception e)
@@ -107,4 +107,29 @@ public class Items
 	  System.out.println(itemsArray.get(i).printInfo());
 	}
   }  // end printItemsInfo
+  
+  
+  public void printCategories()
+  {
+	  for(int i=0; i<itemsCatagory.length; i++)
+	  {
+		  System.out.println( (i+1) + ". " + itemsCatagory[i] + " Items");
+	  }
+	  System.out.println("6. Main Menu");
+  }
+  
+  public void searchItems(int userPick)
+  {
+	int j=1;
+	  
+	for(int i=0; i<itemsArray.size(); i++)
+	{
+      if(itemsArray.get(i).getCategory().equals(itemsCatagory[userPick-1]))
+	  {
+	    System.out.println(j + ". " + itemsArray.get(i).printInfo());
+	    j++;
+      }
+	}
+	System.out.println("Select a new category or return to main menu.");
+  } // end SearchItems  
 } // end Items

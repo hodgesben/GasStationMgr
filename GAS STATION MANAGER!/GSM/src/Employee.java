@@ -8,9 +8,10 @@ public class Employee
   private double wage;               // Monthly Wage of Employee
   private String hireDate;              // Day that the employee gets hired
   private final int rating;          // Rating of Employee 0-5
-  private final String strengths;    // Strength of the Employee 
-  private final String weaknesses;   // weakness of the Employee
+  private String[] strength = {"Fast", "Friendly", "Happy"};
+  private String[] weakness = {"Slow", "Mean", "Angry"};
 	
+  private static Cal calendar = new Cal();
   // Create an ArrayList of Possible Employees up for Hire
   private static ArrayList<Employee> EmployeesArry = new ArrayList<Employee>(); 
   
@@ -24,8 +25,6 @@ public class Employee
 	this.age = 0;
 	this.wage = 0;
 	this.rating = 0;
-	this.strengths = "";
-	this.weaknesses = "";
   }
   
   // **********************************************************
@@ -38,8 +37,6 @@ public class Employee
 	this.age = age;
 	this.wage = wage;
 	this.rating = rating;
-	this.strengths = strengths;
-	this.weaknesses = weaknesses;
 	this.hireDate = hireDay;
   } // end constructor
 	
@@ -47,13 +44,29 @@ public class Employee
   
   // This method adds Employees objects to the Employees Array
 	
-  public void loadEmployees()
+  public void loadFiveEmployees()
   {
-	EmployeesArry.add(new Employee("Ben Packer", 24, 350, 3, "Fast", "Incosistant", ""));
-	EmployeesArry.add(new Employee("Rachel Flower", 24, 350, 3, "Slow", "Does great job", ""));
-	EmployeesArry.add(new Employee("Ben Packer", 24, 400, 4, "Fast", "Incosistant", ""));	
+	for (int i=0; i<4; i++)
+	{
+		EmployeesArry.add(new Employee(combineName(), (int) (Math.random() * 45) + 18, 350, (int) (Math.random() * 4), 
+			strength[(int) (Math.random() * strength.length)], weakness[(int) (Math.random() * weakness.length)], calendar.getDate()));
+	}
   } // end loadEmployees
 	
+  // **********************************************************
+  
+  // Creates full name for employees
+  
+  private static String combineName()
+  {
+	  String[] firstName = {"Ben", "Brennan", "Katy", "Shean", "Calen", "Derek", "Dave"};
+	  String[] lastName = {"Hodges", "Meyers", "Keeling", "Packer", "Flower", "Manning", "Maholmes"};
+	  String fullName;	  
+	  fullName = (firstName[(int) (Math.random() * firstName.length)] + 
+			  " " + lastName[(int) (Math.random() * lastName.length)]);
+	
+	  return fullName;
+  } //end combineName
   // **********************************************************
 	
   // Returns a string of all the information about the Employee
@@ -62,8 +75,8 @@ public class Employee
   {
 	return "Name: " + this.name + "\nAge: " + this.age 
 	  + "\nWage: " + this.wage + "\nRating: " + this.rating + " star" 
-	  +  "\nStrengths: " + this.strengths + "\nWeaknesses: " 
-	  + this.weaknesses + "\nDate of Hire: " + this.hireDate + "\n";
+	  +  "\nStrengths: " + "\nWeaknesses: " 
+	  +  "\nDate of Hire: " + this.hireDate + "\n";
   }  // end getInfo
 	
   public double getWage()
@@ -80,16 +93,6 @@ public class Employee
   {
 	return this.age;
   } // end getAge
-	
-  public String getStrengths()
-  {
-	return this.strengths;
-  } // end getStrengths
-	
-  public String getWeaknesses()
-  {
-	return this.weaknesses;
-  } // end getWeaknesses
   
   public String getHireDate()
   {

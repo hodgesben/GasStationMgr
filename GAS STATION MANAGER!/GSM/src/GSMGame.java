@@ -22,7 +22,7 @@ public class GSMGame
     
 	items.loadItems();
 //	items.printItemsInfo();
-    employee.loadEmployees();
+    employee.loadFiveEmployees();
   	displayMainMenu();
   } // end main
 	
@@ -120,17 +120,33 @@ public class GSMGame
 	  	} while(userPick != 3);
   } // end manageItemsMenu
 
-//*********************************************************
+  //*********************************************************
   
   // Prints out the buy Items
 
   private static void buyItems()
   {
+	
+    Scanner std = new Scanner(System.in);
+	int userPick = -1; 
 	System.out.println("Buy Items Menu");
 	System.out.println("-----------------------------------");
-	System.out.println("Candy Items");
-	System.out.println("Soda Items");
-	System.out.println("Food Items");
+	items.printCategories();
+	do {
+	      userPick = std.nextInt();
+		  switch(userPick)
+		  {
+		  	case 1: case 2: case 3: case 4: case 5:
+		  	  items.searchItems(userPick);
+		  	  break;
+		  	case 6:
+		  	  displayMainMenu();
+		  	  break;
+		  	default:
+		  	  System.out.println("Enter a valid Number and Try again");
+		  }
+	  	} while (userPick != 6);
+	  	std.close();
   }
 
   //*********************************************************
@@ -342,7 +358,7 @@ public class GSMGame
 	
   private static void dailySim()
   {
-	calendar.addDay(); // increment number of days
+	calendar.addDay(); // increment number of days in the cal Class
 
 	// Checks the array of employees to see if any need their monthly paycheck
 	for(int i=0; i<store.getEmployeeArry().size(); i++)
