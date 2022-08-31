@@ -1,25 +1,25 @@
 [{
   "name": "Reese's",
-  "catagory": "Candy",
+  "category": "Candy",
   "buyPrice": 1
 }, {
   "name": "Hershey",
-  "catagory": "Candy",
+  "category": "Candy",
   "buyPrice": 1
 }, {
   "name": "Skittles",
-  "catagory": "Candy",
+  "category": "Candy",
   "buyPrice": 1
 }, {
   "name": "Bud-Light",
-  "catagory": "Beer",
+  "category": "Beer",
   "buyPrice": 10
 }, {
   "name": "Natural Light",
-  "catagory": "Beer",
+  "category": "Beer",
   "buyPrice": 7
 }, {
   "name": "Boulevard",
-  "catagory": "Beer",
+  "category": "Beer",
   "buyPrice": 12
 }]

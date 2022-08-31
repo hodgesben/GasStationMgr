@@ -6,7 +6,7 @@ public class Employee
   private final String name;         // name of the Employee
   private int age;                   // age of Employee
   private double wage;               // Monthly Wage of Employee
-  private String hireDate;              // Day that the employee gets hired
+  private String hireDate;           // Day that the employee gets hired
   private final int rating;          // Rating of Employee 0-5
   private String[] strength = {"Fast", "Friendly", "Happy"};
   private String[] weakness = {"Slow", "Mean", "Angry"};
@@ -118,6 +118,7 @@ public class Employee
   {
 	this.age = age;
   } // end setAge
+  
 
   public static String printEmployeeInfo()
   {

@@ -120,11 +120,11 @@ public class Store
 	  int age =  employee.getAge();	
 	  double wage =  employee.getWage();
 	  int rating =  employee.getRating();
-  	  String strength =  employee.getStrengths();
-	  String weakness =  employee.getWeaknesses();
+  	//  String strength =  employee.getStrengths();
+	//  String weakness =  employee.getWeaknesses();
       String hireDay = cal.getDate();
       
-	  Employees.add(new Employee(name, age, wage, rating, strength, weakness, hireDay));
+	  Employees.add(new Employee(name, age, wage, rating, "test", "test", hireDay));
 	  
 	
 	  System.out.println(name + " successfully added as a new Employee\n");
@@ -171,6 +171,5 @@ public class Store
 
   public void reRollEmployees() 
   {
-	//Test Push Git
   } // end reRollEmployees
 } // end Store

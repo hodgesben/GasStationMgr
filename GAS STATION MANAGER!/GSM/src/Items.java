@@ -73,7 +73,7 @@ public class Items
 	try 
 	{
 	  Items[] myPojo = mapper.readValue(
-		new File("C:/Users/Ben/git/GasStationMgr/GAS STATION MANAGER!/GSM/Items.json"), Items[].class);
+		new File("C:/Users/Ben/git/GasStationMgr/GAS STATION MANAGER!/GSM/Items.JSON"), Items[].class);
 	  for(int i=0; i < myPojo.length; i++)
 	  {
 		itemsArray.add(new Items(myPojo[i].getName(), myPojo[i].getCategory(), myPojo[i].getBuyPrice()));
@@ -81,24 +81,12 @@ public class Items
 	}
 	catch(Exception e)
 	{
-	  System.out.println("ERROR Loading Items from JSON File");
+	  System.out.println(e);
 	}
   } // end loadItems
 
   
   // ***********************************************
-  
-  //  Basic way to load in Items
-  
-  public void loadItems() 
-  {
-	itemsArray.add(new Items("Reese's", "Candy", 1));
-	itemsArray.add(new Items("Hershey", "Candy", 1));
-	itemsArray.add(new Items("Skittles", "Candy", 1));
-	itemsArray.add(new Items("Bud-Light", "Beer", 10));
-	itemsArray.add(new Items("Natural Light", "Beer", 7));
-	itemsArray.add(new Items("Boulevard",  "Beer", 12));
-  } // end loadItems
   
   public void printItemsInfo()
   {

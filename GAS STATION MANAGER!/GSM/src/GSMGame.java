@@ -20,7 +20,7 @@ public class GSMGame
   {
 	printInstructions();
     
-	items.loadItems();
+	items.loadItemsJSON();
 //	items.printItemsInfo();
     employee.loadFiveEmployees();
   	displayMainMenu();
